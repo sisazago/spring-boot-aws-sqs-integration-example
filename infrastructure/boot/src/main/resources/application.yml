@@ -1,0 +1,29 @@
+server:
+  port: 9080
+
+spring:
+  application:
+    name: AWS SQS Integration example
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
+
+config:
+  aws:
+    region:
+      static: us-east-1
+    credentials:
+      access-key: AKIAYJUVHRLSLHPD7CMG
+      secret-key: 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
+
+sqs:
+  queue:
+    region: us-east-1
+    url: https://localhost.localstack.cloud:4566/000000000000/notification-queue.fifo
+    arn: arn:aws:sqs:us-east-1:000000000000:notification-queue.fifo
+  instance:
+    local: true
+  message:
+    group: group
