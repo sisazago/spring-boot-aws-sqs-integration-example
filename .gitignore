@@ -32,3 +32,5 @@ domain/model/build/
 domain/service/build/
 
 spring-boot-aws-sqs-integration-example.iml
+
+build/

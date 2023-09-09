@@ -5,5 +5,5 @@ plugins {
 jar.enabled = true
 
 dependencies {
-
+    implementation 'org.springframework:spring-web'
 }

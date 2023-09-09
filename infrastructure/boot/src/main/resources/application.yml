@@ -21,8 +21,8 @@ config:
 sqs:
   queue:
     region: us-east-1
-    url: https://localhost.localstack.cloud:4566/000000000000/notification-queue.fifo
-    arn: arn:aws:sqs:us-east-1:000000000000:notification-queue.fifo
+    url: https://localhost.localstack.cloud:4566/000000000000/test-queue
+    arn: arn:aws:sqs:us-east-1:000000000000:test-queue
   instance:
     local: true
   message:
