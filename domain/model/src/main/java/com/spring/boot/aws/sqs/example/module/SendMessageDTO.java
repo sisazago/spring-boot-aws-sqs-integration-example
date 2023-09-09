@@ -2,7 +2,7 @@ package com.spring.boot.aws.sqs.example.module;
 
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,5 +13,5 @@ public class SendMessageDTO {
 
     private String message;
 
-    private LocalDate date;
+    private Date date;
 }

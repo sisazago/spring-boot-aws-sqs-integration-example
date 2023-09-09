@@ -6,7 +6,7 @@ plugins {
 }
 
 allprojects {
-    group = 'co.personal.aws.sqs'
+    group = 'com.spring.boot.aws.sqs.example'
 
 
     repositories {
@@ -46,10 +46,8 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:${spring_boot_version}")
-        }
-
-        dependencies {
-
+            mavenBom("com.amazonaws:aws-java-sdk-bom:${amazon_sdk_version}")
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_version}")
         }
     }
 

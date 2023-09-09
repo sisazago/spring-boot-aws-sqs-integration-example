@@ -9,6 +9,7 @@ import com.spring.boot.aws.sqs.example.module.SendMessageResultDTO;
 import com.spring.boot.aws.sqs.example.module.ex.controller.RestException;
 import com.spring.boot.aws.sqs.example.service.message.SendMessageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/message")
@@ -29,8 +31,10 @@ public class SendMessageControllerImpl implements SendMessageController {
     @Override
     @PostMapping
     public ResponseEntity<MessageResponse> sendMessage(@RequestBody MessageRequest message, BindingResult result) {
+        log.info("[Start][SendMessageControllerImpl][sendMessage]input:{}", message);
         if(!result.hasErrors()){
             SendMessageResultDTO resultDTO = sendMessageService.sendMessage(mapper.toDTO(message));
+            log.info("[End][SendMessageControllerImpl][sendMessage]output: {}", resultDTO);
             return ResponseEntity.ok(mapper.toResponse(resultDTO));
         }
         throw new RestException("The information is not complete", HttpStatus.UNPROCESSABLE_ENTITY, "10006");

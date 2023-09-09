@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AwsSqsConfig {
 
-    @Value("${config.aws.region.static}")
-    private String awsRegion;
+    @Value("${sqs.queue.region}")
+    private String region;
 
     @Value("${config.aws.credentials.access-key}")
     private String awsAccessKey;
@@ -26,19 +26,18 @@ public class AwsSqsConfig {
     private Boolean localInstance;
 
     @Value("${sqs.queue.url}")
-    private String sqsQueueUrl;
+    private String awsSqsEndpoint;
 
     @Bean
-    public AmazonSQS amazonSQS(){
-        // Validate if you are running the sqs services locally and if this is the case use your local configuration.
-        if(localInstance != null && localInstance.equals(Boolean.TRUE)){
+    public AmazonSQS amazonSQSS() {
+        if(localInstance != null && localInstance) {
             return AmazonSQSClient.builder()
-                    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsQueueUrl, awsRegion))
+                    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsSqsEndpoint, region))
                     .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(awsAccessKey, awsSecretKey)))
                     .build();
         }else{
             return AmazonSQSClient.builder()
-                    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsQueueUrl, awsRegion))
+                    .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsSqsEndpoint, region))
                     .withCredentials(new InstanceProfileCredentialsProvider(false))
                     .build();
         }

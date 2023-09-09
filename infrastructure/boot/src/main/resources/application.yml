@@ -26,4 +26,4 @@ sqs:
   instance:
     local: true
   message:
-    group: group
+    group:
